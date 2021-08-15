@@ -20,8 +20,8 @@ fun Route.exerciseRoutes(
     get("/getAllExercises") {
         when (val result = exerciseRepository.getAllExercises()) {
             is Result.SuccessWithListOfData -> call.respond(result.data)
-            is Result.FailureWithMsg -> call.respond(result.msg)
-            else -> call.respond("Couldn't get exercises!")
+            is Result.FailureWithMsg -> call.respond(HttpStatusCode.ExpectationFailed, GenericResponse(result.msg))
+            else -> call.respond(HttpStatusCode.ExpectationFailed, GenericResponse("Couldn't get exercises!"))
         }
     }
 
