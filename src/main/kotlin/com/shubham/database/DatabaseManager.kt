@@ -18,6 +18,7 @@ class DatabaseManager {
     init {
 //        val jdbcUrl = "jdbc:postgresql://$hostname:5432/$databaseName?user=$username&password=$password&useSSL=false"
         val jdbcUrl = "jdbc:postgresql://${uri.host}:${uri.port}${uri.path}?user=$username&password=$password&useSSL=require"
+        println("You are connecting to this url: $jdbcUrl")
         ktormDatabase = Database.connect(jdbcUrl)
     }
 
