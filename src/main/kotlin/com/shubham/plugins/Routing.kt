@@ -7,6 +7,7 @@ import com.shubham.models.Result
 import com.shubham.utils.jwt.JWTService
 import com.shubham.utils.routes.exerciseRoutes
 import com.shubham.utils.routes.memberRoutes
+import com.shubham.utils.routes.routineExerciseRoutes
 import com.shubham.utils.routes.routineRoutes
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -54,6 +55,7 @@ fun Application.configureRouting() {
         memberRoutes(ktormDatabase)
         exerciseRoutes(ktormDatabase)
         routineRoutes(ktormDatabase)
+        routineExerciseRoutes(ktormDatabase)
 
         get("/") {
             call.respond("Welcome to GymBuddy! \n\nIf you're seeing this message, this means your deployment has been successful! \n\nHave fun!")

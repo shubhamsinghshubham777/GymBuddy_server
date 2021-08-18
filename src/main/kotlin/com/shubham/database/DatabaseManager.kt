@@ -5,12 +5,15 @@ import java.net.URI
 
 class DatabaseManager {
 
-    private val uri = URI(System.getenv("DATABASE_URL"))
+    /** Local Database Credentials */
 //    private val hostname = "localhost"
 //    private val databaseName = "gymbuddy"
 //    private val username = System.getenv("DB_USERNAME")
-    private val username = uri.userInfo.split(":").toTypedArray()[0]
 //    private val password = System.getenv("DB_PASSWORD")
+
+    /** Heroku DB Credentials */
+    private val uri = URI(System.getenv("DATABASE_URL"))
+    private val username = uri.userInfo.split(":").toTypedArray()[0]
     private val password = uri.userInfo.split(":").toTypedArray()[1]
 
     val ktormDatabase: Database
