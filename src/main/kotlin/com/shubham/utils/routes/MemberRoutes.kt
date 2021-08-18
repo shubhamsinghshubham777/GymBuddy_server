@@ -8,6 +8,7 @@ import com.shubham.models.MemberLoginRequest
 import com.shubham.utils.jwt.JWTService
 import com.shubham.utils.jwt.hashFromUserPassword
 import io.ktor.application.*
+import io.ktor.auth.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -93,11 +94,13 @@ fun Route.memberRoutes(
         }
     }
 
-    patch("/updateMember") {
-        val receivedMember = call.receive<Member>()
-        when (val result = memberRepository.updateMember(receivedMember)) {
-            is Result.Success -> call.respond(HttpStatusCode.OK, GenericResponse("User updated successfully!"))
-            is Result.FailureWithMsg -> call.respond(HttpStatusCode.ExpectationFailed, GenericResponse(result.msg))
+    authenticate {
+        patch("/updateMember") {
+            val receivedMember = call.receive<Member>()
+            when (val result = if (!receivedMember.password.isNullOrBlank()) memberRepository.updateMember(receivedMember.copy(password = encryptUserPassword(receivedMember.password))) else memberRepository.updateMember(receivedMember)) {
+                is Result.Success -> call.respond(HttpStatusCode.OK, GenericResponse("User updated successfully!"))
+                is Result.FailureWithMsg -> call.respond(HttpStatusCode.ExpectationFailed, GenericResponse(result.msg))
+            }
         }
     }
 }

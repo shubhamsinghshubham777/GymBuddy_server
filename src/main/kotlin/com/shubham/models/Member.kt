@@ -13,7 +13,7 @@ data class Member(
     val joinedOn: LocalDate?,
     val membershipType: MembershipType? = MembershipType.STANDARD_MEMBER,
     val password: String?,
-    val token: String,
+    val token: String?,
     val userImage: ByteArray?,
     val routines: TextArray?
 ): Principal {

@@ -54,7 +54,7 @@ class MemberRepository(
                     if (foundMember.phone != member.phone && member.phone > 0) set(it.phone, member.phone)
                     if (!foundMember.userImage.contentEquals(member.userImage) && member.userImage?.isNotEmpty() == true) set(it.userImage, member.userImage)
                     if (!foundMember.routines.contentEquals(member.routines) && !member.routines.isNullOrEmpty()) set(it.routines, member.routines)
-//                set(it.password, member.password)
+                    if (!member.password.isNullOrBlank()) set(it.password, member.password)
 //                set(it.token, member.token)
                     where { it.id eq id }
 
