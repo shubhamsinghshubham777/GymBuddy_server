@@ -15,7 +15,8 @@ data class Member(
     val password: String?,
     val token: String?,
     val userImage: ByteArray?,
-    val routines: TextArray?
+    val routines: TextArray?,
+    val gender: Gender?
 ): Principal {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -46,4 +47,10 @@ enum class MembershipType {
     STANDARD_MEMBER,
     GOLD_MEMBER,
     PLATINUM_MEMBER
+}
+
+enum class Gender {
+    Male,
+    Female,
+    Other
 }

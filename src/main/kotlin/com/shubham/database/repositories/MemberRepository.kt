@@ -1,6 +1,5 @@
 package com.shubham.database.repositories
 
-import com.shubham.database.DatabaseManager
 import com.shubham.database.interfaces.MemberRepositoryMethods
 import com.shubham.database.tables.MemberTable
 import com.shubham.database.tables.MemberTable.id
@@ -28,6 +27,7 @@ class MemberRepository(
                 set(it.token, member.token)
                 set(it.userImage, member.userImage)
                 set(it.routines, member.routines)
+                set(it.gender, member.gender)
             } as? Int?
 
             when (result) {
@@ -56,6 +56,7 @@ class MemberRepository(
                     if (!foundMember.routines.contentEquals(member.routines) && !member.routines.isNullOrEmpty()) set(it.routines, member.routines)
                     if (!member.password.isNullOrBlank()) set(it.password, member.password)
                     if (foundMember.membershipType != member.membershipType && member.membershipType != null) set(it.membershipType, member.membershipType)
+                    if (foundMember.gender != member.gender && member.gender != null) set(it.gender, member.gender)
 //                set(it.token, member.token)
                     where { it.id eq id }
 
@@ -88,7 +89,8 @@ class MemberRepository(
                 null,
                 dbEntity.token,
                 dbEntity.userImage,
-                dbEntity.routines
+                dbEntity.routines,
+                dbEntity.gender
             )
         )
     }
@@ -107,7 +109,8 @@ class MemberRepository(
                 dbEntity.password,
                 dbEntity.token,
                 dbEntity.userImage,
-                dbEntity.routines
+                dbEntity.routines,
+                dbEntity.gender
             )
         )
     }
@@ -125,7 +128,8 @@ class MemberRepository(
                 null,
                 it.token,
                 it.userImage,
-                it.routines
+                it.routines,
+                it.gender
             )
         }
         return when {

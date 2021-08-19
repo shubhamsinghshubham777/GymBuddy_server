@@ -1,5 +1,6 @@
 package com.shubham.database.tables
 
+import com.shubham.models.Gender
 import com.shubham.models.MembershipType
 import org.ktorm.entity.Entity
 import org.ktorm.schema.*
@@ -19,6 +20,7 @@ object MemberTable: Table<MemberEntity>("member") {
     val token = text("token").bindTo { it.token }
     val userImage = bytes("userImage").bindTo { it.userImage }
     val routines = textArray("routines").bindTo { it.routines }
+    val gender = enum<Gender>("gender").bindTo { it.gender }
 }
 
 interface MemberEntity: Entity<MemberEntity> {
@@ -35,4 +37,5 @@ interface MemberEntity: Entity<MemberEntity> {
     val token: String
     val userImage: ByteArray?
     val routines: TextArray?
+    val gender: Gender?
 }

@@ -50,7 +50,8 @@ fun Route.memberRoutes(
             password = encryptUserPassword(memberReceived.password!!),
             token = jwtService.generateToken(memberReceived.email),
             userImage = memberReceived.userImage,
-            routines = memberReceived.routines
+            routines = memberReceived.routines,
+            gender = memberReceived.gender
         )
 
         when (val result = memberRepository.insertMember(memberToBeInserted)) {
