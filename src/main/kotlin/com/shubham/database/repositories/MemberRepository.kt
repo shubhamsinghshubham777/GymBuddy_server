@@ -55,6 +55,7 @@ class MemberRepository(
                     if (!foundMember.userImage.contentEquals(member.userImage) && member.userImage?.isNotEmpty() == true) set(it.userImage, member.userImage)
                     if (!foundMember.routines.contentEquals(member.routines) && !member.routines.isNullOrEmpty()) set(it.routines, member.routines)
                     if (!member.password.isNullOrBlank()) set(it.password, member.password)
+                    if (foundMember.membershipType != member.membershipType && member.membershipType != null) set(it.membershipType, member.membershipType)
 //                set(it.token, member.token)
                     where { it.id eq id }
 
