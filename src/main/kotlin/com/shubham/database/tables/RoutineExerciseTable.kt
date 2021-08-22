@@ -1,5 +1,6 @@
 package com.shubham.database.tables
 
+import com.shubham.database.tables.ExerciseTable.bindTo
 import org.ktorm.entity.Entity
 import org.ktorm.schema.Table
 import org.ktorm.schema.int
@@ -13,6 +14,7 @@ object RoutineExerciseTable: Table<RoutineExerciseEntity>("routine_exercise") {
     val reps = int("reps").bindTo { it.reps }
     val video_link = text("video_link").bindTo { it.video_link }
     val exercise_image = text("exercise_image").bindTo { it.exercise_image }
+    val about = text("about").bindTo { it.about }
 }
 
 interface RoutineExerciseEntity: Entity<RoutineExerciseEntity> {
@@ -25,4 +27,5 @@ interface RoutineExerciseEntity: Entity<RoutineExerciseEntity> {
     val reps: Int
     val video_link: String
     val exercise_image: String
+    val about: String
 }

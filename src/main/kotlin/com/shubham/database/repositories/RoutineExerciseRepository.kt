@@ -22,6 +22,7 @@ class RoutineExerciseRepository(
                 set(it.reps, exercise.reps)
                 set(it.video_link, exercise.video_link)
                 set(it.exercise_image, exercise.exercise_image)
+                set(it.about, exercise.about)
             } as? Int?
 
             return if (userId != null) Result.Success() else Result.FailureWithMsg("Couldn't insert exercise!")
@@ -40,6 +41,7 @@ class RoutineExerciseRepository(
                     reps?.let { set(table.reps, it) }
                     video_link?.let { set(table.video_link, it) }
                     exercise_image?.let { set(table.exercise_image, it) }
+                    about?.let { set(table.about, it) }
                     where { table.id eq id }
                 }
             }
@@ -63,13 +65,14 @@ class RoutineExerciseRepository(
                 dbEntity.reps,
                 dbEntity.video_link,
                 dbEntity.exercise_image,
+                dbEntity.about,
             )
         )
     }
 
     override suspend fun getAllExercisesWithIdList(listOfExerciseIds: List<Int>): Result<Exercise> {
         val list = db.sequenceOf(RoutineExerciseTable).toList().map {
-            Exercise(it.id, it.name, it.body_part, it.sets, it.reps, it.video_link, it.exercise_image)
+            Exercise(it.id, it.name, it.body_part, it.sets, it.reps, it.video_link, it.exercise_image, it.about)
         }.filter { it.id in listOfExerciseIds.toIntArray() }.sortedBy { it.id }
         return when {
             list.isNotEmpty() -> Result.SuccessWithListOfData(list)

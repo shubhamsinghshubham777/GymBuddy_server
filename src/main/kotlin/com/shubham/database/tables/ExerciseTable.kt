@@ -13,6 +13,7 @@ object ExerciseTable: Table<ExerciseEntity>("exercise") {
     val reps = int("reps").bindTo { it.reps }
     val video_link = text("video_link").bindTo { it.video_link }
     val exercise_image = text("exercise_image").bindTo { it.exercise_image }
+    val about = text("about").bindTo { it.about }
 }
 
 interface ExerciseEntity: Entity<ExerciseEntity> {
@@ -25,4 +26,5 @@ interface ExerciseEntity: Entity<ExerciseEntity> {
     val reps: Int
     val video_link: String
     val exercise_image: String
+    val about: String
 }

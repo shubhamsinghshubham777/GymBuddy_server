@@ -7,5 +7,6 @@ data class Exercise(
     val sets: Int?,
     val reps: Int?,
     val video_link: String?,
-    val exercise_image: String?
+    val exercise_image: String?,
+    val about: String?
 )
